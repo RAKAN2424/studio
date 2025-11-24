@@ -1,3 +1,34 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-background",
+      "description": "A stylish woman with beautiful, flowing hair.",
+      "imageUrl": "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxoYWlyJTIwbW9kZWx8ZW58MHx8fHwxNzYzOTkxODAxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "hair model"
+    },
+    {
+      "id": "product-shampoo",
+      "description": "A bottle of LaVie shampoo.",
+      "imageUrl": "https://images.unsplash.com/photo-1574670700790-fa314ab37787?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzaGFtcG9vJTIwYm90dGxlfGVufDB8fHx8MTc2Mzk5MTgwMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "shampoo bottle"
+    },
+    {
+      "id": "product-conditioner",
+      "description": "A bottle of LaVie conditioner.",
+      "imageUrl": "https://images.unsplash.com/photo-1701992679320-7f3dbb8090d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb25kaXRpb25lciUyMGJvdHRsZXxlbnwwfHx8fDE3NjM4OTg1Mzd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "conditioner bottle"
+    },
+    {
+      "id": "product-serum",
+      "description": "A bottle of LaVie hair serum.",
+      "imageUrl": "https://images.unsplash.com/photo-1715750968540-841103c78d47?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxzZXJ1bSUyMGJvdHRsZXxlbnwwfHx8fDE3NjM5NTk0MjN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "serum bottle"
+    },
+    {
+      "id": "product-mask",
+      "description": "A jar of LaVie hair mask.",
+      "imageUrl": "https://images.unsplash.com/photo-1561444326-baba43294667?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8aGFpciUyMG1hc2t8ZW58MHx8fHwxNzYzODg1MDY0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "hair mask"
+    }
+  ]
 }
