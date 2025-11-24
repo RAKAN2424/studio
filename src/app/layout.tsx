@@ -6,8 +6,8 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'LaVieAI Hair Advisor',
-  description: 'Personalized hair care advice powered by AI.',
+  title: 'LAVIE COSMETICS EGYPT | Official La Vie Professional Distributor',
+  description: 'Official distributor of La Vie Professional Brazilian Haircare in Egypt. Authentic products, certified quality.',
 };
 
 export default function RootLayout({
@@ -20,11 +20,11 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Caveat:wght@400..700&family=Comfortaa:wght@300..700&display=swap" rel="stylesheet" />
       </head>
       <body
         className={cn(
-          'min-h-screen bg-background font-body antialiased',
+          'min-h-screen bg-background font-comfortaa antialiased',
         )}
       >
         <div className="relative flex min-h-dvh flex-col bg-background">
