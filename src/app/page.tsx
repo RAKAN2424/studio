@@ -1,11 +1,11 @@
-import { getProductsFromCollection } from '@/lib/shopify';
+import { getProducts } from '@/lib/shopify';
 import { ProductCard } from '@/components/ProductCard';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default async function Home() {
-  const products = await getProductsFromCollection('main-collection');
+  const products = await getProducts({});
 
   return (
     <>

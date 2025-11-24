@@ -27,19 +27,24 @@ import {
 } from './mutations/cart';
 import { getCartQuery } from './queries/cart';
 
-const domain = SHOPIFY_STORE_DOMAIN;
-const endpoint = `https://${domain}/api/2023-10/graphql.json`;
-const key = SHOPIFY_STOREFRONT_ACCESS_TOKEN;
-
-type ShopifyFetchProps = {
-  query: string;
-  variables?: Record<string, unknown>;
-};
+const domain = process.env.SHOPIFY_STORE_DOMAIN;
+const key = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
 async function shopifyFetch<T>({
   query,
   variables,
-}: ShopifyFetchProps): Promise<T> {
+}: {
+  query: string;
+  variables?: Record<string, unknown>;
+}): Promise<{ status: number; body: T }> {
+  if (!domain || !key) {
+    throw new Error(
+      'Missing Shopify credentials. Please check your .env file for SHOPIFY_STORE_DOMAIN and SHOPIFY_STOREFRONT_ACCESS_TOKEN.'
+    );
+  }
+  
+  const endpoint = `https://${domain}/api/2024-04/graphql.json`;
+
   try {
     const result = await fetch(endpoint, {
       method: 'POST',
@@ -57,9 +62,12 @@ async function shopifyFetch<T>({
       throw body.errors[0];
     }
 
-    return body.data;
+    return {
+      status: result.status,
+      body: body.data,
+    };
   } catch (e: unknown) {
-    const error = e as Error;
+    const error = e as Error & { status: number };
     throw new Error(`Error receiving data from Shopify: ${error.message}`);
   }
 }
@@ -82,7 +90,7 @@ export async function getProducts({
     },
   });
 
-  return res.products.edges.map((edge) => edge.node);
+  return res.body.products.edges.map((edge) => edge.node);
 }
 
 export async function getProduct(handle: string): Promise<Product | undefined> {
@@ -93,7 +101,7 @@ export async function getProduct(handle: string): Promise<Product | undefined> {
     },
   });
 
-  return res.product;
+  return res.body.product;
 }
 
 export async function getCollection(handle: string): Promise<Collection | undefined> {
@@ -104,7 +112,7 @@ export async function getCollection(handle: string): Promise<Collection | undefi
     },
   });
 
-  return res.collection;
+  return res.body.collection;
 }
 
 export async function getCollections(): Promise<Collection[]> {
@@ -112,7 +120,7 @@ export async function getCollections(): Promise<Collection[]> {
     query: getCollectionsQuery,
   });
 
-  return res.collections.edges.map((edge) => edge.node);
+  return res.body.collections.edges.map((edge) => edge.node);
 }
 
 export async function getProductsFromCollection(handle: string): Promise<Product[]> {
@@ -123,12 +131,12 @@ export async function getProductsFromCollection(handle: string): Promise<Product
         },
     });
     
-    if (!res.collection) {
+    if (!res.body.collection) {
       console.warn(`Collection with handle "${handle}" not found.`);
       return [];
     }
 
-    return res.collection.products.edges.map((edge) => edge.node);
+    return res.body.collection.products.edges.map((edge) => edge.node);
 }
 
 export async function createCart(): Promise<Cart> {
@@ -136,7 +144,7 @@ export async function createCart(): Promise<Cart> {
     query: createCartMutation,
   });
 
-  return res.cartCreate.cart;
+  return res.body.cartCreate.cart;
 }
 
 export async function addToCart(
@@ -150,7 +158,7 @@ export async function addToCart(
       lines,
     },
   });
-  return res.cartLinesAdd.cart;
+  return res.body.cartLinesAdd.cart;
 }
 
 export async function removeFromCart(
@@ -165,7 +173,7 @@ export async function removeFromCart(
     },
   });
 
-  return res.cartLinesRemove.cart;
+  return res.body.cartLinesRemove.cart;
 }
 
 export async function updateCart(
@@ -180,7 +188,7 @@ export async function updateCart(
     },
   });
 
-  return res.cartLinesUpdate.cart;
+  return res.body.cartLinesUpdate.cart;
 }
 
 export async function getCart(cartId: string): Promise<Cart | undefined> {
@@ -189,5 +197,11 @@ export async function getCart(cartId: string): Promise<Cart | undefined> {
     variables: { cartId },
   });
 
-  return res.cart;
+  // If the cart is not found, Shopify returns a null body.
+  // We can check for this and return undefined.
+  if (!res.body.cart) {
+    return undefined;
+  }
+
+  return res.body.cart;
 }
