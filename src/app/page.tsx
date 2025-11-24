@@ -6,6 +6,10 @@ import ChatWidget from '@/components/chat/ChatWidget';
 import Link from 'next/link';
 
 export default function Home() {
+  const findImage = (id: string) => {
+    return PlaceHolderImages.find(img => img.id === id)?.imageUrl || `https://placehold.co/600x400?text=${id}`;
+  };
+
 
   return (
     <>
@@ -42,6 +46,28 @@ export default function Home() {
               </Button>
             </Link>
             <div className="flex flex-wrap justify-center gap-8 md:gap-12">
+               {products.map((product) => (
+                <div key={product.id} className="group flex flex-col items-center w-48 text-center cursor-pointer">
+                  <Link href={`/shop/${product.id}`}>
+                    <div className="relative w-40 h-40 rounded-full overflow-hidden border-2 border-transparent group-hover:border-brand-pink dark:group-hover:border-brand-gold transition-all duration-300 shadow-lg group-hover:shadow-xl">
+                      <Image
+                        src={findImage(product.image)}
+                        alt={product.name}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        data-ai-hint={product.image.replace('product-','')}
+                      />
+                    </div>
+                  </Link>
+                  <h3 className="mt-4 text-lg font-bold text-brand-text dark:text-brand-gold group-hover:text-brand-pink dark:group-hover:text-white transition-colors h-14 flex items-center justify-center">
+                    {product.name}
+                  </h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">{product.price}</p>
+                   <Link href={`/shop/${product.id}`}>
+                    <Button size="sm" className="bg-brand-pink text-white hover:opacity-90 transition-colors rounded-full px-6 py-2 text-xs uppercase tracking-wider">Shop Now</Button>
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         </section>
