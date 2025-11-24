@@ -76,6 +76,11 @@ export interface Collection {
   seo: SEO;
   updatedAt: string;
   path: string;
+  products: {
+    edges: {
+      node: Product;
+    }[];
+  }
 }
 
 export interface Cart {

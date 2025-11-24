@@ -9,8 +9,9 @@ import {
 } from '@/lib/shopify';
 import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
+import { Line } from '@/lib/shopify/types';
 
-export async function addItem(selectedVariantId: string) {
+export async function addItem(prevState: any, selectedVariantId: string) {
   let cartId = cookies().get('cartId')?.value;
   let cart;
 
@@ -30,13 +31,13 @@ export async function addItem(selectedVariantId: string) {
 
   try {
     await addToCart(cartId, [{ merchandiseId: selectedVariantId, quantity: 1 }]);
-    revalidatePath('/cart');
+    revalidatePath('/');
   } catch (e) {
     return 'Error adding item to cart';
   }
 }
 
-export async function removeItem(lineId: string) {
+export async function removeItem(prevState: any, lineId: string) {
   const cartId = cookies().get('cartId')?.value;
 
   if (!cartId) {
@@ -51,22 +52,38 @@ export async function removeItem(lineId: string) {
   }
 }
 
-export async function updateItemQuantity(lineId: string, quantity: number) {
-    const cartId = cookies().get('cartId')?.value;
+export async function updateItemQuantity(
+  prevState: any,
+  payload: {
+    lineId: string;
+    variantId: string;
+    quantity: number;
+  }
+) {
+  const cartId = cookies().get('cartId')?.value;
 
-    if (!cartId) {
-        return 'Missing cart ID';
+  if (!cartId) {
+    return 'Missing cart ID';
+  }
+
+  const { lineId, variantId, quantity } = payload;
+
+  try {
+    if (quantity === 0) {
+      await removeFromCart(cartId, [lineId]);
+      revalidatePath('/cart');
+      return;
     }
-    
-    try {
-        await updateCart(cartId, [
-        {
-            id: lineId,
-            quantity,
-        },
-        ]);
-        revalidatePath('/cart');
-    } catch (e) {
-        return 'Error updating item quantity';
-    }
+
+    await updateCart(cartId, [
+      {
+        id: lineId,
+        merchandiseId: variantId,
+        quantity,
+      },
+    ]);
+    revalidatePath('/cart');
+  } catch (e) {
+    return 'Error updating item quantity';
+  }
 }

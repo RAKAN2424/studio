@@ -1,3 +1,4 @@
+
 import {
   SHOPIFY_STORE_DOMAIN,
   SHOPIFY_STOREFRONT_ACCESS_TOKEN,
@@ -30,13 +31,15 @@ const domain = SHOPIFY_STORE_DOMAIN;
 const endpoint = `https://${domain}/api/2023-10/graphql.json`;
 const key = SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
+type ShopifyFetchProps = {
+  query: string;
+  variables?: Record<string, unknown>;
+};
+
 async function shopifyFetch<T>({
   query,
   variables,
-}: {
-  query: string;
-  variables?: Record<string, unknown>;
-}): Promise<T> {
+}: ShopifyFetchProps): Promise<T> {
   try {
     const result = await fetch(endpoint, {
       method: 'POST',
@@ -55,12 +58,9 @@ async function shopifyFetch<T>({
     }
 
     return body.data;
-  } catch (e) {
-    console.error(e);
-    throw {
-      status: 500,
-      message: 'Error receiving data from Shopify',
-    };
+  } catch (e: unknown) {
+    const error = e as Error;
+    throw new Error(`Error receiving data from Shopify: ${error.message}`);
   }
 }
 
@@ -122,6 +122,11 @@ export async function getProductsFromCollection(handle: string): Promise<Product
             handle,
         },
     });
+    
+    if (!res.collection) {
+      console.warn(`Collection with handle "${handle}" not found.`);
+      return [];
+    }
 
     return res.collection.products.edges.map((edge) => edge.node);
 }
@@ -165,7 +170,7 @@ export async function removeFromCart(
 
 export async function updateCart(
   cartId: string,
-  lines: { id: string; merchandiseId: string; quantity: number }[]
+  lines: { id: string; merchandiseId?: string; quantity: number }[]
 ): Promise<Cart> {
   const res = await shopifyFetch<ShopifyUpdateCartOperation>({
     query: updateCartMutation,

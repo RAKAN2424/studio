@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -13,17 +14,6 @@ export default function ChatWidget() {
     const handleToggle = () => {
         setIsOpen(prev => !prev);
     };
-
-    useEffect(() => {
-        const button = buttonRef.current;
-        if (button) {
-            if (isOpen) {
-                button.style.opacity = '0.8';
-            } else {
-                button.style.opacity = '1';
-            }
-        }
-    }, [isOpen]);
 
     return (
         <>
