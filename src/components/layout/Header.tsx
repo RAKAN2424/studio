@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ShoppingCartIcon, UserIcon } from 'lucide-react';
-import { cookies } from 'next/headers';
 import { getCart } from '@/lib/shopify';
+import { cookies } from 'next/headers';
 
 export async function Header() {
-  const cartId = cookies().get('cartId')?.value;
+  const cartId = (await cookies()).get('cartId')?.value;
   let cart;
 
   if (cartId) {
