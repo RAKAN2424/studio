@@ -2,82 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Comfortaa', sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --foreground: 222.2 84% 4.9%;
+
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 222.2 84% 4.9%;
+
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 346 84% 61%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 345 20% 95%;
-    --accent-foreground: 348 27% 42%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 348 27% 52%;
-    --chart-1: 348 27% 52%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 346 84% 61%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 348 27% 52%;
-    --chart-1: 348 27% 52%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 210 40% 98%;
   }
 }
 
@@ -87,247 +72,5 @@ body {
   }
   body {
     @apply bg-background text-foreground;
-  }
-  h1, h2, h3, h4, h5, h6, .font-serif {
-    font-family: 'Baskervville', serif;
-  }
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee 20s linear infinite;
-}
-
-.caveat-heading {
-  font-family: "Caveat", cursive;
-  font-weight: 600;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-}
-
-:root {
-  /* Light Mode Colors */
-  --chat-btn-bg-light: #1A1A1A;
-  --chat-btn-text-light: #FFFFFF;
-  --chat-close-light: #4A4A4A;
-  
-  /* Dark Mode Colors */
-  --chat-btn-bg-dark: linear-gradient(135deg, #DAA520 0%, #FFD700 100%);
-  --chat-btn-text-dark: #000000;
-  --chat-close-dark: #E0E0E0;
-}
-
-/* Container for the entire chat widget */
-.ai-chat-widget {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  direction: ltr; /* Force LTR for this component */
-}
-
-/* Close Button (X) - Outside on the LEFT */
-.chat-close-btn {
-  width: 28px;
-  height: 28px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(0.8);
-}
-
-.chat-close-btn.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1);
-}
-
-.chat-close-btn svg {
-  width: 16px;
-  height: 16px;
-  stroke: var(--chat-close-light);
-  transition: stroke 0.3s ease, transform 0.3s ease;
-}
-
-.chat-close-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: scale(1.1);
-}
-
-.chat-close-btn:hover svg {
-  transform: rotate(90deg);
-}
-
-/* Main Chat Button */
-.ai-chat-button {
-  width: 140px;
-  height: 56px;
-  background: var(--chat-btn-bg-light);
-  border: none;
-  border-radius: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
-}
-
-.ai-chat-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.ai-chat-button:hover::before {
-  left: 100%;
-}
-
-.ai-chat-button:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-}
-
-.ai-chat-button:active {
-  transform: translateY(-1px) scale(1.02);
-}
-
-/* Button Text */
-.chat-button-text {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--chat-btn-text-light);
-  letter-spacing: 0.5px;
-  position: relative;
-  z-index: 1;
-}
-
-.chat-button-text .brand-name {
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.chat-button-text .ai-badge {
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 0.9;
-}
-
-/* Pulse Animation for Initial Attention */
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  }
-  50% {
-    box-shadow: 0 4px 24px rgba(26, 26, 26, 0.4);
-  }
-}
-
-.ai-chat-button.pulse {
-  animation: pulse 2s ease-in-out infinite;
-}
-
-/* ===================================== */
-/* DARK MODE STYLES */
-/* ===================================== */
-
-.dark .ai-chat-button {
-  background: var(--chat-btn-bg-dark);
-  box-shadow: 0 4px 20px rgba(218, 165, 32, 0.4);
-}
-
-.dark .ai-chat-button:hover {
-  box-shadow: 0 8px 32px rgba(218, 165, 32, 0.6);
-}
-
-.dark .chat-button-text {
-  color: var(--chat-btn-text-dark);
-}
-
-.dark .chat-close-btn svg {
-  stroke: var(--chat-close-dark);
-}
-
-.dark .chat-close-btn {
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.dark .chat-close-btn:hover {
-  background: rgba(0, 0, 0, 0.5);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-.dark .ai-chat-button.pulse {
-  animation-name: pulse-dark;
-}
-
-@keyframes pulse-dark {
-  0%, 100% {
-    box-shadow: 0 4px 20px rgba(218, 165, 32, 0.4);
-  }
-  50% {
-    box-shadow: 0 4px 32px rgba(218, 165, 32, 0.7);
-  }
-}
-
-@media (max-width: 768px) {
-  .ai-chat-widget {
-    bottom: 20px;
-    right: 20px;
-  }
-  
-  .ai-chat-button {
-    width: 120px;
-    height: 48px;
-  }
-  
-  .chat-button-text {
-    font-size: 14px;
-  }
-  
-  .chat-button-text .ai-badge {
-    font-size: 12px;
-  }
-  
-  .chat-close-btn {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .chat-close-btn svg {
-    width: 14px;
-    height: 14px;
   }
 }
