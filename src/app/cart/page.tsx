@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default async function CartPage() {
-  const cartId = cookies().get('cartId')?.value;
+  const cartId = (await cookies()).get('cartId')?.value;
   let cart;
 
   if (cartId) {
