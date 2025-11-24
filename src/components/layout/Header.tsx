@@ -9,6 +9,7 @@ export function Header() {
     { href: '/shop', label: 'Shop' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact Us' },
+    { href: '/tracking', label: 'Track Order' },
   ];
 
   return (
@@ -30,10 +31,10 @@ export function Header() {
             <Link href="/">
               <Image
                 alt="LAVIE Logo"
-                width="140"
+                width="56"
                 height="56"
-                className="h-14 w-auto drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]"
-                src="https://i.ibb.co/bnrr18f/Lavie-1080-x-1080-px-1080-x-360-px.png"
+                className="h-14 w-14 object-contain drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]"
+                src="https://i.ibb.co/xSkmkymJ/9-1.png"
               />
             </Link>
           </div>

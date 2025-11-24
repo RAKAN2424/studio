@@ -6,16 +6,16 @@ import { Textarea } from '../ui/textarea';
 import { MapPin, Phone, Mail, Facebook, Instagram, Twitter } from 'lucide-react';
 
 const PaymentPartner = ({ src, alt }: { src: string; alt: string }) => (
-  <div className="relative h-12 w-24 flex items-center justify-center grayscale-[50%] hover:grayscale-0 transition-all duration-300 opacity-90 hover:opacity-100">
-    <Image
-      alt={alt}
-      loading="lazy"
-      fill
-      className="object-contain"
-      style={{ transform: alt === 'Meeza' ? 'scale(1.4)' : alt === 'Fawry' ? 'scale(2.5)' : (alt === 'Vodafone Cash' || alt === 'Orange Cash') ? 'scale(2.8)' : alt === 'Instapay' ? 'scale(2.6)' : 'scale(1.6)', transformOrigin: 'center' }}
-      src={src}
-    />
-  </div>
+    <div className="relative h-8 w-14 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all">
+        <Image
+          alt={alt}
+          loading="lazy"
+          fill
+          className="object-contain"
+          sizes="56px"
+          src={src}
+        />
+    </div>
 );
 
 export function Footer() {
@@ -29,7 +29,7 @@ export function Footer() {
     { name: 'Shop All Products', href: '/shop' },
     { name: 'Best Sellers', href: '/shop' },
     { name: 'About Us', href: '/about' },
-    { name: 'Terms of Service', href: '/terms' },
+    { name: 'Track Order', href: '/tracking' },
   ];
 
   const paymentPartners = [
@@ -40,6 +40,7 @@ export function Footer() {
     { src: 'https://i.ibb.co/G3tbq6tK/New-Project-5-4.png', alt: 'Vodafone Cash' },
     { src: 'https://i.ibb.co/676FkK9F/New-Project-5.png', alt: 'Instapay' },
     { src: 'https://i.ibb.co/rRDg77bY/New-Project-1.png', alt: 'Orange Cash' },
+    { src: 'https://www.eand.com.eg/portal/assets/images/e&money-logo.png', alt: 'Etisalat Cash' },
   ];
 
   return (
@@ -48,7 +49,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="text-sm">
             <Link href="/" className="mb-4 inline-block">
-              <Image alt="LAVIE COSMETICS" loading="lazy" width="150" height="50" src="https://i.ibb.co/bnrr18f/Lavie-1080-x-1080-px-1080-x-360-px.png" />
+              <Image alt="LAVIE COSMETICS" loading="lazy" width="60" height="60" src="https://i.ibb.co/xSkmkymJ/9-1.png" />
             </Link>
             <p className="leading-relaxed text-gray-400">
               Official and exclusive distributor of La Vie Professional Brazil in Egypt. We bring authentic Brazilian hair technology to the heart of the local market, ensuring certified quality and transformative results.
@@ -98,7 +99,7 @@ export function Footer() {
         <div className="border-t border-zinc-800 pt-8 mb-8">
           <div className="max-w-xl mx-auto flex flex-col items-center justify-center">
             <h5 className="text-sm text-gray-400 mb-4">Secure Payment Partners</h5>
-            <div className="flex items-center justify-center gap-x-8 gap-y-6 flex-wrap">
+            <div className="flex items-center justify-center gap-4 flex-wrap">
               {paymentPartners.map(p => <PaymentPartner key={p.alt} src={p.src} alt={p.alt} />)}
             </div>
           </div>
