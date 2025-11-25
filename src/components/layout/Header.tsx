@@ -3,12 +3,18 @@ import Link from 'next/link';
 import { useTheme } from "next-themes";
 import { ShoppingBag, Sun, Moon, User, Menu } from "lucide-react";
 import { useCart } from "@/app/providers";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
   const { cart, setIsCartOpen } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const totalItems = cart.reduce((sum: number, item: any) => sum + item.quantity, 0);
 
   return (
@@ -23,18 +29,22 @@ export default function Header() {
           <Link href="#contact" className="hover:text-[#805454] transition-colors">Contact</Link>
         </nav>
         <div className="flex items-center gap-4 text-gray-700 dark:text-gray-200">
-          <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-          <button className="p-2 hover:text-[#805454]"><User size={20} /></button>
-          <button onClick={() => setIsCartOpen(true)} className="relative p-2 hover:text-[#805454]">
-            <ShoppingBag size={20} />
-            {totalItems > 0 && (
-              <span className="absolute -top-1 -right-1 bg-[#805454] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
-                {totalItems}
-              </span>
-            )}
-          </button>
+          {isMounted && (
+            <>
+              <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
+                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
+              <button className="p-2 hover:text-[#805454]"><User size={20} /></button>
+              <button onClick={() => setIsCartOpen(true)} className="relative p-2 hover:text-[#805454]">
+                <ShoppingBag size={20} />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-[#805454] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </button>
+            </>
+          )}
           <button className="md:hidden p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}><Menu size={24} /></button>
         </div>
       </div>
