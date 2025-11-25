@@ -1,7 +1,6 @@
-
 "use client";
 
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from "next-themes";
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function WhatsAppBtn() {
