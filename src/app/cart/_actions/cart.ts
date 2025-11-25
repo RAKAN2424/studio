@@ -9,7 +9,6 @@ import {
 } from '@/lib/shopify';
 import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
-import { Line } from '@/lib/shopify/types';
 
 export async function addItem(prevState: any, selectedVariantId: string) {
   let cartId = cookies().get('cartId')?.value;
@@ -53,7 +52,6 @@ export async function removeItem(prevState: any, lineId: string) {
 }
 
 export async function updateItemQuantity(
-  prevState: any,
   payload: {
     lineId: string;
     variantId: string;

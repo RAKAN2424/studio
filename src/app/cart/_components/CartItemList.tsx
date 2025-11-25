@@ -12,6 +12,20 @@ import { X } from 'lucide-react';
 export default function CartItemList({ lines }: { lines: Line[] }) {
   const [isPending, startTransition] = useTransition();
 
+  const handleQuantityChange = (lineId: string, quantity: number) => {
+    startTransition(async () => {
+      const line = lines.find((l) => l.id === lineId);
+      if (!line) return;
+
+      const payload = {
+        lineId: line.id,
+        variantId: line.merchandise.id,
+        quantity: quantity,
+      };
+      await updateItemQuantity(payload);
+    });
+  };
+  
   return (
     <div className="space-y-4">
       {lines.map((item) => (
@@ -37,9 +51,7 @@ export default function CartItemList({ lines }: { lines: Line[] }) {
                 className="w-20 h-9"
                 defaultValue={item.quantity}
                 onChange={(e) => {
-                  startTransition(async () => {
-                    await updateItemQuantity(item.id, parseInt(e.target.value));
-                  });
+                  handleQuantityChange(item.id, parseInt(e.target.value));
                 }}
                 disabled={isPending}
               />
