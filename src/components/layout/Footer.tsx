@@ -1,7 +1,14 @@
 "use client";
 import { Facebook, Instagram, Twitter, Phone, Mail, MapPin } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function Footer() {
+  const [year, setYear] = useState(new Date().getFullYear());
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer id="contact" className="bg-gray-100 dark:bg-zinc-950 pt-20 pb-10 border-t border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12 mb-16">
@@ -44,7 +51,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="container mx-auto px-4 text-center pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="text-xs text-gray-400">© 2025 La Vie Cosmetics Egypt. Official Distributor.</p>
+        <p className="text-xs text-gray-400">© {year} La Vie Cosmetics Egypt. Official Distributor.</p>
         <p className="text-[10px] text-gray-500 uppercase tracking-widest">Cruelty-Free | Paraben-Free | Made in Brazil</p>
       </div>
     </footer>
