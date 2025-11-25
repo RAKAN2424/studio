@@ -2,11 +2,21 @@
 
 import { useTheme } from "next-themes";
 import { FaWhatsapp } from "react-icons/fa";
+import { useState, useEffect } from "react";
 
 export default function WhatsAppBtn() {
   const { theme } = useTheme();
-  const isDark = theme === 'dark';
+  const [isMounted, setIsMounted] = useState(false);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
+  const isDark = theme === 'dark';
   const backgroundColor = isDark ? '#C6A87C' : '#25D366';
 
   return (
