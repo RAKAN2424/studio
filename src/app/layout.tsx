@@ -1,3 +1,4 @@
+
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -31,13 +32,6 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Caveat:wght@400..700&family=Comfortaa:wght@300..700&display=swap"
           rel="stylesheet"
         />
-        <style>{`
-          body { font-family: 'Comfortaa', sans-serif; margin: 0; padding: 0; }
-          h1, h2, h3, h4, h5, h6, .font-serif { font-family: 'Baskervville', serif; }
-          .font-caveat { font-family: 'Caveat', cursive; }
-          @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
-          .animate-marquee { animation: marquee 20s linear infinite; }
-        `}</style>
       </head>
       <body className="antialiased font-comfortaa">
         <Providers>

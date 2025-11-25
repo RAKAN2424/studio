@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -69,9 +70,25 @@
   }
   body {
     @apply bg-background text-brand-text dark:text-gray-300;
+    font-family: 'Comfortaa', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: 'Baskervville', serif;
+  }
+  .font-caveat {
+    font-family: 'Caveat', cursive;
   }
   .caveat-heading {
     @apply text-brand-pink dark:text-brand-gold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
   }
 }
