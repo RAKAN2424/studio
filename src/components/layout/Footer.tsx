@@ -13,6 +13,9 @@ export default function Footer() {
 
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+  
+  useEffect(() => {
     setYear(new Date().getFullYear());
   }, []);
 

@@ -21,7 +21,7 @@ export default function AboutPage() {
       <section className="container mx-auto px-4 py-16 md:py-24">
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="prose dark:prose-invert max-w-none">
-            <h2 className="text-4xl font-serif text-primary dark:text-brand-gold mb-4">The Heart of Brazilian Haircare in Egypt</h2>
+            <h2 className="text-4xl font-serif text-primary dark:text-brand-gold mb-4 caveat-heading">The Heart of Brazilian Haircare in Egypt</h2>
             <p className="lead">
               LAVIE is the official and exclusive distributor of La Vie Professional Brazil in Egypt. We are passionate about bringing authentic Brazilian hair technology to the heart of the local market, ensuring certified quality and transformative results for every hair type.
             </p>

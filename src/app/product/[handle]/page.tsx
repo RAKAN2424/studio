@@ -83,5 +83,3 @@ export default async function ProductPage({ params }: { params: { handle: string
     </div>
   );
 }
-
-    

@@ -88,6 +88,11 @@
   .dark .caveat-heading {
       @apply text-brand-gold;
   }
+  
+  .caveat-heading {
+    font-family: "Caveat", cursive;
+    font-weight: 600;
+  }
 
   @keyframes marquee {
     0% { transform: translateX(0%); }

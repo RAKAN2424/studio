@@ -83,7 +83,7 @@ export default function ChatInterface() {
       <SheetHeader className="p-6 border-b">
          <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <SheetTitle className="font-serif text-xl text-primary dark:text-brand-gold">LaVie Hair Consultant</SheetTitle>
+              <SheetTitle className="caveat-heading text-xl text-primary dark:text-brand-gold">LaVie Hair Consultant</SheetTitle>
         </div>
         <SheetDescription className="text-xs">Get instant, personalized hair care recommendations.</SheetDescription>
       </SheetHeader>
