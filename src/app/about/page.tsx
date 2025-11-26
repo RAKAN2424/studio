@@ -4,21 +4,21 @@ export default function AboutPage() {
   return (
     <div className="bg-background">
       {/* Hero Section */}
-      <section className="relative h-[40vh] md:h-[50vh] w-full flex items-center justify-center text-white bg-black">
+      <section className="relative h-[40vh] md:h-[50vh] w-full">
         <Image
           src="https://i.ibb.co/7JSqxcp8/Untitled-1344-x-335-px.png"
           alt="About LaVie Cosmetics"
           layout="fill"
           objectFit="cover"
-          className="opacity-50"
+          className="opacity-80"
         />
-        <div className="relative z-10 text-center">
-          <h1 className="text-5xl md:text-7xl caveat-heading">About LaVie</h1>
-        </div>
       </section>
 
       {/* Main Content */}
       <section className="container mx-auto px-4 py-16 md:py-24">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-7xl caveat-heading">About LaVie</h1>
+        </div>
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="prose dark:prose-invert max-w-none">
             <h2 className="text-4xl font-serif text-primary dark:text-brand-gold mb-4 caveat-heading">The Heart of Brazilian Haircare in Egypt</h2>
