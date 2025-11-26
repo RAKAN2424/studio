@@ -29,7 +29,7 @@
     /* Custom Brand Colors */
     --brand-pink: 344 38% 42%;
     --brand-text: 240 2% 33%; /* #535355 */
-    --brand-gold: 45 61% 55%; /* #C9A24F */
+    --brand-gold: 45 61% 45%; /* #C9A24F - Darker Gold */
     --brand-green-light: 45 50% 80%; /* #c4d6aa */
     --brand-green-dark: 120 25% 15%; /* #182118 */
   }
@@ -41,24 +41,24 @@
     --card-foreground: 0 0% 80%;
     --popover: 0 0% 4%;
     --popover-foreground: 0 0% 80%;
-    --primary: 45 61% 55%; /* #C9A24F - Dark Gold for dark mode */
+    --primary: 45 61% 45%; /* #C9A24F - Darker Gold for dark mode */
     --primary-foreground: 0 0% 0%;
     --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 10%;
     --muted-foreground: 0 0% 60%;
-    --accent: 45 61% 55%; /* #C9A24F - Dark Gold */
+    --accent: 45 61% 45%; /* #C9A24F - Darker Gold */
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 15%;
     --input: 0 0% 15%;
-    --ring: 45 61% 55%; /* #C9A24F - Dark Gold */
+    --ring: 45 61% 45%; /* #C9A24F - Darker Gold */
 
     /* Custom Brand Colors */
     --brand-pink: 344 38% 42%;
     --brand-text: 0 0% 80%;
-    --brand-gold: 45 61% 55%; /* #C9A24F */
+    --brand-gold: 45 61% 45%; /* #C9A24F - Darker Gold */
     --brand-green-light: 45 50% 80%;
     --brand-green-dark: 120 25% 15%;
   }
@@ -87,6 +87,7 @@
   /* Gold headings for night mode */
   .dark .caveat-heading {
       @apply text-brand-gold;
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
   }
   
   .caveat-heading {
