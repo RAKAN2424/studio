@@ -10,14 +10,15 @@ type Message = {
 
 export async function getAIResponse(history: Message[]) {
     try {
-        const chatHistoryString = history
+        const userMessage = history[history.length - 1];
+        const chatHistory = history.slice(0, history.length - 1);
+
+        const chatHistoryString = chatHistory
             .map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`)
             .join('\n');
 
-        // The AI will determine hair type and concerns from the full context.
         const response = await getPersonalizedHairAdvice({
-            hairType: "see chat history",
-            hairConcerns: "see chat history",
+            userInput: userMessage.content,
             productCatalog: staticProductCatalog,
             chatHistory: chatHistoryString,
         });

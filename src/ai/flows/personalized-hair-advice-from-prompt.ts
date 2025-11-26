@@ -11,10 +11,9 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const PersonalizedHairAdviceInputSchema = z.object({
-  hairType: z.string().describe('The user\'s hair type (e.g., oily, dry, normal).'),
-  hairConcerns: z.string().describe('The user\'s specific hair concerns (e.g., dandruff, hair loss, frizz).'),
+  userInput: z.string().describe("The user's latest question or statement about their hair."),
   productCatalog: z.string().describe('A catalog of available hair products from Lavie Cosmetics.'),
-  chatHistory: z.string().optional().describe('The chat history between the user and the AI assistant.')
+  chatHistory: z.string().optional().describe('The previous chat history between the user and the AI assistant.')
 });
 export type PersonalizedHairAdviceInput = z.infer<typeof PersonalizedHairAdviceInputSchema>;
 
@@ -32,16 +31,20 @@ const prompt = ai.definePrompt({
   name: 'personalizedHairAdvicePrompt',
   input: {schema: PersonalizedHairAdviceInputSchema},
   output: {schema: PersonalizedHairAdviceOutputSchema},
-  prompt: `You are a helpful AI assistant specializing in hair care. A user will provide their hair type, concerns, and a product catalog, and you must return personalized advice and product recommendations.
+  prompt: `You are a helpful AI assistant specializing in hair care for Lavie Cosmetics. A user will provide their latest message and the conversation history. You must analyze the full conversation to understand their hair type and concerns, then provide personalized advice and product recommendations based on their new message.
 
-  Here is the user's hair type: {{{hairType}}}
-  Here are the user's hair concerns: {{{hairConcerns}}}
-  Here is the product catalog: {{{productCatalog}}}
-  Here is the chat history, if any: {{{chatHistory}}}
+  Here is the conversation history:
+  {{{chatHistory}}}
 
-  Provide personalized hair care advice and recommend specific products from the catalog that address the user's needs.
-  Make the product recommendations specific, and include the product name.  The response should only include advice and product recommendations, no other conversational text.
-  Format the advice and product recommendations as follows:
+  Here is the user's new message:
+  "{{{userInput}}}"
+
+  Here is the product catalog:
+  {{{productCatalog}}}
+
+  Based on the user's new message and the entire conversation context, provide personalized hair care advice and recommend specific products from the catalog that address the user's needs.
+  Make the product recommendations specific, and include the product name. The response should only include advice and product recommendations, no other conversational text.
+  Format the response as follows:
 
   Advice: [personalized hair care advice]
   Product Recommendations: [specific product recommendations from Lavie Cosmetics]`,
