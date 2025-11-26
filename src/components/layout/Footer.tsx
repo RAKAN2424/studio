@@ -1,20 +1,39 @@
+
 "use client";
 import { Facebook, Instagram, Twitter, Phone, Mail, MapPin } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 export default function Footer() {
   const [year, setYear] = useState(new Date().getFullYear());
+  const { theme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     setYear(new Date().getFullYear());
   }, []);
+
+  const logoSrc = isMounted && theme === 'dark' 
+    ? "https://i.ibb.co/jFM0BXS/Untitled-design-2.png" 
+    : "https://i.ibb.co/bnrr18f/Lavie-1080-x-1080-px-1080-x-360-px.png";
 
   return (
     <footer id="contact" className="bg-black text-gray-300 pt-20 pb-10 border-t border-zinc-800">
       <div className="container mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         <div>
-          <h4 className="font-serif text-2xl mb-6 text-white font-bold">La Vie Cosmetics</h4>
+           {isMounted && (
+            <Image
+                src={logoSrc}
+                alt="LAVIE Logo"
+                width={140}
+                height={56}
+                className="h-14 w-auto mb-4"
+                priority
+              />
+           )}
           <p className="text-sm text-gray-400 leading-relaxed">Official distributor of La Vie Brazil. Bringing authentic Brazilian technology to Egypt. Certified quality and luxury ingredients.</p>
         </div>
         <div>

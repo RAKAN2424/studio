@@ -49,6 +49,10 @@ export default function Header() {
     "hover:text-primary dark:hover:text-brand-gold transition-colors text-xs font-bold uppercase tracking-widest",
     (isScrolled || mobileMenuOpen) ? "text-gray-700 dark:text-gray-300" : "text-white"
   );
+  
+  const logoSrc = isMounted && theme === 'dark' 
+    ? "https://i.ibb.co/jFM0BXS/Untitled-design-2.png" 
+    : "https://i.ibb.co/bnrr18f/Lavie-1080-x-1080-px-1080-x-360-px.png";
 
 
   return (
@@ -58,7 +62,7 @@ export default function Header() {
         <div className='flex-1 md:flex-none'>
             <Link href="/" className={cn("text-3xl font-serif font-bold tracking-wider", (isScrolled || mobileMenuOpen) ? "text-foreground" : "text-white")}>
                  <Image
-                    src="https://i.ibb.co/bnrr18f/Lavie-1080-x-1080-px-1080-x-360-px.png"
+                    src={logoSrc}
                     alt="LAVIE Logo"
                     width={140}
                     height={56}
