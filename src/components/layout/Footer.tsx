@@ -40,7 +40,7 @@ export default function Footer() {
           <p className="text-sm text-gray-400 leading-relaxed">Official distributor of La Vie Brazil. Bringing authentic Brazilian technology to Egypt. Certified quality and luxury ingredients.</p>
         </div>
         <div>
-          <h4 className="font-serif text-xl mb-6 text-white caveat-heading dark:text-brand-gold">Contact</h4>
+          <h4 className="text-xl mb-6 text-white caveat-heading dark:text-brand-gold">Contact</h4>
           <ul className="text-sm text-gray-400 space-y-4">
             <li className="flex items-start gap-3">
               <MapPin size={18} className="text-primary dark:text-brand-gold mt-1 shrink-0" />
@@ -62,7 +62,7 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <h4 className="font-serif text-xl mb-6 text-white caveat-heading dark:text-brand-gold">Quick Links</h4>
+          <h4 className="text-xl mb-6 text-white caveat-heading dark:text-brand-gold">Quick Links</h4>
           <ul className="text-sm text-gray-400 space-y-3">
             <li><Link href="/shop" className="hover:text-white transition-colors">Shop All Products</Link></li>
             <li><Link href="/shop" className="hover:text-white transition-colors">Best Sellers</Link></li>
@@ -71,7 +71,7 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <h4 className="font-serif text-xl mb-6 text-white caveat-heading dark:text-brand-gold">Send us a message</h4>
+          <h4 className="text-xl mb-6 text-white caveat-heading dark:text-brand-gold">Send us a message</h4>
           <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
             <input type="email" placeholder="Your Email" className="w-full bg-zinc-900 border border-zinc-700 p-3 text-sm focus:border-brand-gold outline-none rounded" />
             <textarea placeholder="Message" rows={3} className="w-full bg-zinc-900 border border-zinc-700 p-3 text-sm focus:border-brand-gold outline-none rounded"></textarea>
