@@ -82,7 +82,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 text-center pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="text-xs text-gray-400">© {year} La Vie Cosmetics Egypt. Official Distributor.</p>
         <div className="flex gap-4">
-            <a href="https://www.facebook.com/profile.php?id=61583012441958&mibextid=wwXIfr&rdid=IodofGDVn1mNeXfJ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19DqeX73Kb%2F%3Fmibextid%3DwwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 hover:text-white dark:text-gray-400 dark:hover:text-brand-gold"><Facebook size={20} /></a>
+            <a href="https://www.facebook.com/share/19DqeX73Kb/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 hover:text-white dark:text-gray-400 dark:hover:text-brand-gold"><Facebook size={20} /></a>
             <a href="https://www.instagram.com/laviecosmetics.eg?igsh=OXFnZGpseXJyMmh1" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 hover:text-white dark:text-gray-400 dark:hover:text-brand-gold"><Instagram size={20} /></a>
             <a href="#" aria-label="Twitter" className="text-gray-400 hover:text-white dark:text-gray-400 dark:hover:text-brand-gold"><Twitter size={20} /></a>
         </div>
