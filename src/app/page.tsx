@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { getProducts } from '@/lib/shopify';
+import { products as staticProducts } from '@/lib/products';
 import { Product } from '@/lib/shopify/types';
 import { ProductCard } from '@/components/ProductCard';
 
@@ -22,12 +22,9 @@ export default function Home() {
 
   React.useEffect(() => {
     setIsMounted(true);
-    
-    const fetchProducts = async () => {
-      const bestSellers = await getProducts({sortKey: 'BEST_SELLING', reverse: true});
-      setProducts(bestSellers.slice(0, 4));
-    }
-    fetchProducts();
+    // Use static products
+    const bestSellers = staticProducts.slice(0, 4) as unknown as Product[];
+    setProducts(bestSellers);
   }, []);
 
   React.useEffect(() => {
@@ -37,6 +34,10 @@ export default function Home() {
     }, SLIDES[currentSlide].duration);
     return () => clearTimeout(timer);
   }, [currentSlide, isMounted]);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <main className="min-h-screen bg-background">

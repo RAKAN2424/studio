@@ -1,7 +1,7 @@
 "use server";
 
 import { getPersonalizedHairAdvice } from "@/ai/flows/personalized-hair-advice-from-prompt";
-import { getProducts } from "@/lib/shopify";
+import { productCatalogString as staticProductCatalog } from "@/lib/products";
 
 type Message = {
     role: "user" | "assistant";
@@ -15,10 +15,6 @@ export async function getAIResponse(history: Message[]) {
             return { error: "No user message found." };
         }
 
-        const products = await getProducts({});
-        const productCatalogString = products.map(p => `- ${p.title}: ${p.description}`).join('\n');
-
-
         const chatHistoryString = history
             .slice(0, -1)
             .map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`)
@@ -31,7 +27,7 @@ export async function getAIResponse(history: Message[]) {
         const response = await getPersonalizedHairAdvice({
             hairType: userInput,
             hairConcerns: userInput,
-            productCatalog: productCatalogString,
+            productCatalog: staticProductCatalog,
             chatHistory: chatHistoryString,
         });
 

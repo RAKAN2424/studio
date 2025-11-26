@@ -1,5 +1,5 @@
 
-import { getProducts } from '@/lib/shopify';
+import { products } from '@/lib/products';
 import { ProductCard } from '@/components/ProductCard';
 
 export const metadata = {
@@ -8,7 +8,6 @@ export const metadata = {
 }
 
 export default async function ShopPage() {
-  const products = await getProducts({});
 
   return (
     <main className="min-h-screen">

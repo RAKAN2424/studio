@@ -1,10 +1,54 @@
-import { getProduct } from '@/lib/shopify';
+import { products as staticProducts } from '@/lib/products';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { AddToCart } from './_components/AddToCart';
+import { Product, ProductVariant } from '@/lib/shopify/types';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
+
+function findProduct(handle: string): Product | undefined {
+    const staticProduct = staticProducts.find(p => p.id === handle);
+    if (!staticProduct) return undefined;
+
+    const placeholderImage = PlaceHolderImages.find(img => img.id === staticProduct.image);
+
+    // Adapt the static product to the Shopify Product type
+    return {
+        id: staticProduct.id,
+        handle: staticProduct.id,
+        availableForSale: true,
+        title: staticProduct.name,
+        description: staticProduct.description,
+        descriptionHtml: `<p>${staticProduct.description}</p>`,
+        options: [],
+        priceRange: {
+            maxVariantPrice: { amount: staticProduct.price.replace('EGP ', ''), currencyCode: 'EGP' },
+            minVariantPrice: { amount: staticProduct.price.replace('EGP ', ''), currencyCode: 'EGP' },
+        },
+        variants: [{
+            id: `${staticProduct.id}-variant`,
+            title: 'Default Title',
+            availableForSale: true,
+            selectedOptions: [],
+            price: { amount: staticProduct.price.replace('EGP ', ''), currencyCode: 'EGP' },
+        }] as ProductVariant[],
+        featuredImage: {
+            url: placeholderImage?.imageUrl || '',
+            altText: staticProduct.name,
+            width: 1080,
+            height: 1080,
+        },
+        images: [],
+        seo: {
+            title: staticProduct.name,
+            description: staticProduct.description,
+        },
+        tags: [],
+        updatedAt: new Date().toISOString(),
+    };
+}
 
 export async function generateMetadata({ params }: { params: { handle: string } }) {
-  const product = await getProduct(params.handle);
+  const product = findProduct(params.handle);
 
   if (!product) {
     return {
@@ -22,7 +66,7 @@ export async function generateMetadata({ params }: { params: { handle: string } 
 }
 
 export default async function ProductPage({ params }: { params: { handle: string } }) {
-  const product = await getProduct(params.handle);
+  const product = findProduct(params.handle);
 
   if (!product) {
     return notFound();

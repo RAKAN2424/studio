@@ -4,16 +4,12 @@ import { useTheme } from "next-themes";
 import { ShoppingBag, Sun, Moon, User, Menu, X } from "lucide-react";
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { getCart } from '@/lib/shopify';
-import { Cart } from '@/lib/shopify/types';
-import { cookies } from 'next/headers';
 import { cn } from '@/lib/utils';
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const [cart, setCart] = useState<Cart | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
@@ -29,23 +25,16 @@ export default function Header() {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
+  
   useEffect(() => {
-    const fetchCart = async () => {
-        const cartId = document.cookie.split('; ').find(row => row.startsWith('cartId='))?.split('=')[1];
-        if (cartId) {
-            const currentCart = await getCart(cartId);
-            setCart(currentCart || null);
-        }
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
     }
-    fetchCart();
-    
-    const interval = setInterval(fetchCart, 2000); // Poll for cart changes
-    return () => clearInterval(interval);
+  }, [mobileMenuOpen]);
 
-  }, [pathname]);
-
-  const totalItems = cart?.totalQuantity || 0;
+  const totalItems = 0; // Temporarily disabled
 
   const headerClasses = cn(
     "fixed top-0 w-full z-40 transition-all duration-300",
@@ -56,7 +45,7 @@ export default function Header() {
   
   const navLinkClasses = cn(
     "hover:text-primary dark:hover:text-brand-gold transition-colors text-xs font-bold uppercase tracking-widest",
-    isScrolled ? "text-gray-700 dark:text-gray-300" : "text-white"
+    (isScrolled || mobileMenuOpen) ? "text-gray-700 dark:text-gray-300" : "text-white"
   );
 
 
@@ -65,7 +54,7 @@ export default function Header() {
     <header className={headerClasses}>
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <div className='flex-1 md:flex-none'>
-            <Link href="/" className={cn("text-3xl font-serif font-bold tracking-wider", isScrolled ? "text-foreground" : "text-white")}>
+            <Link href="/" className={cn("text-3xl font-serif font-bold tracking-wider", (isScrolled || mobileMenuOpen) ? "text-foreground" : "text-white")}>
                 LAVIE
             </Link>
         </div>
@@ -78,11 +67,11 @@ export default function Header() {
         <div className="flex items-center gap-2 md:gap-4 justify-end flex-1 md:flex-none">
           {isMounted && (
             <>
-              <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className={cn("p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors", isScrolled ? "text-foreground" : "text-white")}>
+              <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className={cn("p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors", (isScrolled || mobileMenuOpen) ? "text-foreground" : "text-white")}>
                 {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
               </button>
-              <Link href="/account" className={cn("p-2 hover:text-primary dark:hover:text-brand-gold", isScrolled ? "text-foreground" : "text-white")}><User size={20} /></Link>
-              <Link href="/cart" className={cn("relative p-2 hover:text-primary dark:hover:text-brand-gold", isScrolled ? "text-foreground" : "text-white")}>
+              <Link href="/account" className={cn("p-2 hover:text-primary dark:hover:text-brand-gold", (isScrolled || mobileMenuOpen) ? "text-foreground" : "text-white")}><User size={20} /></Link>
+              <Link href="/cart" className={cn("relative p-2 hover:text-primary dark:hover:text-brand-gold", (isScrolled || mobileMenuOpen) ? "text-foreground" : "text-white")}>
                 <ShoppingBag size={20} />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary dark:bg-brand-gold text-white dark:text-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
@@ -92,7 +81,7 @@ export default function Header() {
               </Link>
             </>
           )}
-          <button className={cn("md:hidden p-2", isScrolled ? "text-foreground" : "text-white")} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button className={cn("md:hidden p-2", (isScrolled || mobileMenuOpen) ? "text-foreground" : "text-white")} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? <X size={24}/> : <Menu size={24} />}
           </button>
         </div>
