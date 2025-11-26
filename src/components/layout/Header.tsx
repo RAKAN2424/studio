@@ -47,12 +47,19 @@ export default function Header() {
   
   const navLinkClasses = cn(
     "hover:text-primary dark:hover:text-white transition-colors text-2xl font-caveat",
-    (isScrolled || mobileMenuOpen) ? "text-gray-700 dark:text-brand-gold" : "text-white dark:text-brand-gold"
+    (isScrolled || mobileMenuOpen) ? "text-gray-700 dark:text-brand-gold" : "text-white"
   );
   
   const logoSrc = isMounted && theme === 'dark' 
     ? "https://i.ibb.co/jFM0BXS/Untitled-design-2.png" 
     : "https://i.ibb.co/bnrr18f/Lavie-1080-x-1080-px-1080-x-360-px.png";
+
+  const iconClasses = cn(
+    "p-2 rounded-full transition-colors",
+    (isScrolled || mobileMenuOpen)
+      ? "text-foreground hover:bg-gray-100 dark:text-brand-gold dark:hover:bg-gray-800"
+      : "text-white hover:bg-white/10 dark:text-brand-gold"
+  );
 
 
   return (
@@ -80,11 +87,11 @@ export default function Header() {
         <div className="flex items-center gap-2 md:gap-4 justify-end flex-1 md:flex-none">
           {isMounted && (
             <>
-              <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className={cn("p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors", (isScrolled || mobileMenuOpen) ? "text-foreground" : "text-white")}>
+              <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className={iconClasses}>
                 {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
               </button>
-              <Link href="/account" className={cn("p-2 hover:text-primary dark:hover:text-brand-gold", (isScrolled || mobileMenuOpen) ? "text-foreground" : "text-white")}><User size={20} /></Link>
-              <Link href="/cart" className={cn("relative p-2 hover:text-primary dark:hover:text-brand-gold", (isScrolled || mobileMenuOpen) ? "text-foreground" : "text-white")}>
+              <Link href="/account" className={iconClasses}><User size={20} /></Link>
+              <Link href="/cart" className={cn("relative", iconClasses)}>
                 <ShoppingBag size={20} />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary dark:bg-brand-gold text-white dark:text-black text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
@@ -94,7 +101,7 @@ export default function Header() {
               </Link>
             </>
           )}
-          <button className={cn("md:hidden p-2", (isScrolled || mobileMenuOpen) ? "text-foreground" : "text-white")} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button className={cn("md:hidden", iconClasses)} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? <X size={24}/> : <Menu size={24} />}
           </button>
         </div>
