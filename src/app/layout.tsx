@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/chat/ChatWidget";
 import WhatsAppBtn from "@/components/WhatsAppBtn";
 import { Toaster } from "@/components/ui/toaster";
+import { CartProvider } from "@/hooks/use-cart";
 
 export const metadata: Metadata = {
   title: "LAVIE COSMETICS EGYPT | Official La Vie Professional Distributor",
@@ -35,14 +36,18 @@ export default function RootLayout({
       </head>
       <body className="antialiased font-comfortaa">
         <Providers>
+          <CartProvider>
             <Header />
             {children}
             <WhatsAppBtn />
             <ChatWidget />
             <Footer />
             <Toaster />
+          </CartProvider>
         </Providers>
       </body>
     </html>
   );
 }
+
+    

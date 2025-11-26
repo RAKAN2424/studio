@@ -1,44 +1,43 @@
+
 'use client';
 
-import { addItem } from '@/app/cart/_actions/cart';
 import { Button } from '@/components/ui/button';
 import { ProductVariant } from '@/lib/shopify/types';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { useCart } from '@/hooks/use-cart';
+import { useToast } from '@/hooks/use-toast';
+import { products } from '@/lib/products';
+import { useParams } from 'next/navigation';
 
 export function AddToCart({ variants }: { variants: ProductVariant[] }) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
-
-  const defaultVariantId = variants.length === 1 ? variants[0]?.id : undefined;
-  const variant = variants.find((variant: ProductVariant) =>
-    variant.selectedOptions.every(
-      (option) => option.value === searchParams.get(option.name.toLowerCase())
-    )
-  );
-  const selectedVariantId = variant?.id || defaultVariantId;
-  const isAvailable = variant ? variant.availableForSale : variants[0]?.availableForSale;
-
+  const { addItem } = useCart();
+  const { toast } = useToast();
+  const params = useParams();
+  const product = products.find(p => p.handle === params.handle);
+  
   const handleAddToCart = () => {
-    if (!selectedVariantId) return;
+    if (!product) return;
+    
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: parseFloat(product.price),
+      quantity: 1,
+      image: product.image,
+    });
 
-    startTransition(async () => {
-      const error = await addItem(selectedVariantId);
-
-      if (error) {
-        // Handle error (e.g., show a toast)
-        console.error(error);
-        return;
-      }
-      // Optionally, you can redirect to the cart or show a success message.
-      router.push('/cart');
+    toast({
+      title: "Added to Cart",
+      description: `${product.name} has been added to your cart.`,
     });
   };
 
+  const isAvailable = product ? product.availableForSale : false;
+
   return (
-    <Button onClick={handleAddToCart} disabled={!isAvailable || isPending}>
-      {isPending ? 'Adding...' : isAvailable ? 'Add to Cart' : 'Out of Stock'}
+    <Button onClick={handleAddToCart} disabled={!isAvailable}>
+      {isAvailable ? 'Add to Cart' : 'Out of Stock'}
     </Button>
   );
 }
+
+    

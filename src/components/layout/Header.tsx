@@ -1,3 +1,4 @@
+
 "use client";
 import Link from 'next/link';
 import { useTheme } from "next-themes";
@@ -5,6 +6,7 @@ import { ShoppingBag, Sun, Moon, User, Menu, X } from "lucide-react";
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { useCart } from '@/hooks/use-cart';
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -12,6 +14,7 @@ export default function Header() {
   const [isMounted, setIsMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const { totalItems } = useCart();
 
   useEffect(() => {
     setIsMounted(true);
@@ -33,8 +36,6 @@ export default function Header() {
       document.body.style.overflow = '';
     }
   }, [mobileMenuOpen]);
-
-  const totalItems = 0; // Temporarily disabled
 
   const headerClasses = cn(
     "fixed top-0 w-full z-40 transition-all duration-300",
@@ -101,3 +102,5 @@ export default function Header() {
     </>
   );
 }
+
+    
