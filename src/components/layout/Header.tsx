@@ -46,9 +46,8 @@ export default function Header() {
   );
   
   const navLinkClasses = cn(
-    "hover:text-primary dark:hover:text-brand-gold transition-colors text-lg",
-    (isScrolled || mobileMenuOpen) ? "text-gray-700 dark:text-gray-300" : "text-white",
-    "font-caveat"
+    "hover:text-primary dark:hover:text-white transition-colors text-lg font-caveat",
+    (isScrolled || mobileMenuOpen) ? "text-gray-700 dark:text-brand-gold" : "text-white dark:text-brand-gold"
   );
   
   const logoSrc = isMounted && theme === 'dark' 
