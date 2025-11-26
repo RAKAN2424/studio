@@ -10,23 +10,14 @@ type Message = {
 
 export async function getAIResponse(history: Message[]) {
     try {
-        const currentUserMessage = history.findLast(m => m.role === 'user');
-        if (!currentUserMessage) {
-            return { error: "No user message found." };
-        }
-
         const chatHistoryString = history
-            .slice(0, -1)
             .map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`)
             .join('\n');
 
-        // Simple check to pass something for hairType/hairConcerns
-        // A more sophisticated implementation could parse this from the message.
-        const userInput = currentUserMessage.content;
-
+        // The AI will determine hair type and concerns from the full context.
         const response = await getPersonalizedHairAdvice({
-            hairType: userInput,
-            hairConcerns: userInput,
+            hairType: "see chat history",
+            hairConcerns: "see chat history",
             productCatalog: staticProductCatalog,
             chatHistory: chatHistoryString,
         });
