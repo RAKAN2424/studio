@@ -41,24 +41,24 @@
     --card-foreground: 0 0% 80%;
     --popover: 0 0% 4%;
     --popover-foreground: 0 0% 80%;
-    --primary: 45 61% 55%; /* Gold for dark mode */
+    --primary: 45 61% 55%; /* #C9A24F - Dark Gold for dark mode */
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 10%;
     --muted-foreground: 0 0% 60%;
-    --accent: 45 61% 55%;
+    --accent: 45 61% 55%; /* #C9A24F - Dark Gold */
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 15%;
     --input: 0 0% 15%;
-    --ring: 45 61% 55%;
+    --ring: 45 61% 55%; /* #C9A24F - Dark Gold */
 
     /* Custom Brand Colors */
     --brand-pink: 344 38% 42%;
     --brand-text: 0 0% 80%;
-    --brand-gold: 45 61% 55%;
+    --brand-gold: 45 61% 55%; /* #C9A24F */
     --brand-green-light: 45 50% 80%;
     --brand-green-dark: 120 25% 15%;
   }

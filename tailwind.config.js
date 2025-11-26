@@ -73,7 +73,7 @@ module.exports = {
           ring: 'hsl(var(--sidebar-ring))',
         },
         'brand-pink': 'hsl(var(--primary))',
-        'brand-gold': '#FFD700',
+        'brand-gold': 'hsl(var(--brand-gold))',
         'brand-text': '#333333',
         'brand-green-light': '#a7c957',
       },
