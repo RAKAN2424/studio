@@ -11,7 +11,7 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 344 38% 42%; /* #805454 - Luxury Dark Pink */
+    --primary: 344 38% 42%; /* #9F5161 - Deep Rose Pink */
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 90%;
     --secondary-foreground: 240 10% 3.9%;
@@ -29,36 +29,36 @@
     /* Custom Brand Colors */
     --brand-pink: 344 38% 42%;
     --brand-text: 240 2% 33%; /* #535355 */
-    --brand-gold: 38 60% 55%; /* #C9A24F */
+    --brand-gold: 45 61% 55%; /* #C9A24F */
     --brand-green-light: 45 50% 80%; /* #c4d6aa */
     --brand-green-dark: 120 25% 15%; /* #182118 */
   }
 
   .dark {
-    --background: 0 0% 0%; /* #000000 */
+    --background: 0 0% 2%; /* #050505 - Matte Black */
     --foreground: 0 0% 80%; /* Soft Grey for body text */
     --card: 0 0% 4%; /* #0A0A0A */
     --card-foreground: 0 0% 80%;
     --popover: 0 0% 4%;
     --popover-foreground: 0 0% 80%;
-    --primary: 344 38% 42%;
+    --primary: 45 61% 55%; /* Gold for dark mode */
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 10%;
     --muted-foreground: 0 0% 60%;
-    --accent: 344 38% 42%;
+    --accent: 45 61% 55%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 15%;
     --input: 0 0% 15%;
-    --ring: 344 38% 42%;
+    --ring: 45 61% 55%;
 
     /* Custom Brand Colors */
     --brand-pink: 344 38% 42%;
     --brand-text: 0 0% 80%;
-    --brand-gold: 38 60% 55%;
+    --brand-gold: 45 61% 55%;
     --brand-green-light: 45 50% 80%;
     --brand-green-dark: 120 25% 15%;
   }
@@ -77,13 +77,18 @@
   h1, h2, h3, h4, h5, h6, .font-serif {
     font-family: 'Baskervville', serif;
   }
-  .font-caveat {
-    font-family: 'Caveat', cursive;
+
+  /* Big pink headings for day mode with shadow */
+  .light .caveat-heading {
+    @apply text-primary;
+    text-shadow: 0 0 18px rgba(0, 0, 0, 0.5);
   }
-  .caveat-heading {
-    @apply text-brand-pink dark:text-brand-gold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  
+  /* Gold headings for night mode */
+  .dark .caveat-heading {
+      @apply text-brand-gold;
   }
+
   @keyframes marquee {
     0% { transform: translateX(0%); }
     100% { transform: translateX(-50%); }

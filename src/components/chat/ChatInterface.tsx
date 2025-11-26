@@ -29,7 +29,7 @@ export default function ChatInterface() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hello! I'm your LaVie AI Hair Advisor. Tell me about your hair type and any concerns you have so I can provide personalized advice.",
+      content: "Hi! I'm your Lavie Cosmetics Hair Expert. Tell me about your hair type or concerns (e.g., dry, damaged, frizzy, thinning), and I'll recommend the perfect routine using Lavie products!",
     },
   ]);
   const [isPending, startTransition] = useTransition();
@@ -43,11 +43,17 @@ export default function ChatInterface() {
     },
   });
 
-  useEffect(() => {
-    if (scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
+  const viewport = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    if (viewport.current) {
+        viewport.current.scrollTop = viewport.current.scrollHeight;
     }
-  }, [messages]);
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isPending]);
 
   const onSubmit = (values: z.infer<typeof chatSchema>) => {
     const userMessage: Message = { role: "user", content: values.message };
@@ -63,8 +69,8 @@ export default function ChatInterface() {
           title: "Error",
           description: result.error,
         });
-        // Optionally remove the user's message if the call fails
-        setMessages(messages);
+        const assistantMessage: Message = { role: "assistant", content: result.error };
+        setMessages((prev) => [...prev, assistantMessage]);
       } else if (result.data) {
         const assistantMessage: Message = { role: "assistant", content: result.data };
         setMessages((prev) => [...prev, assistantMessage]);
@@ -74,20 +80,23 @@ export default function ChatInterface() {
 
   return (
     <div className="flex h-full flex-col">
-      <SheetHeader className="p-6">
-        <SheetTitle className="font-headline text-2xl text-primary">LaVie AI Hair Advisor</SheetTitle>
-        <SheetDescription>Get instant, personalized hair care recommendations.</SheetDescription>
+      <SheetHeader className="p-6 border-b">
+         <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <SheetTitle className="font-serif text-xl text-primary dark:text-brand-gold">LaVie Hair Consultant</SheetTitle>
+        </div>
+        <SheetDescription className="text-xs">Get instant, personalized hair care recommendations.</SheetDescription>
       </SheetHeader>
-      <ScrollArea className="flex-1" ref={scrollAreaRef}>
+      <ScrollArea className="flex-1" viewportRef={viewport}>
         <div className="space-y-6 p-6">
           {messages.map((message, index) => (
             <ChatMessage key={index} message={message} />
           ))}
           {isPending && (
             <div className="flex items-start gap-3">
-              <Avatar className="h-8 w-8 border-2 border-primary">
-                <AvatarFallback className="bg-primary">
-                  <LogoIcon className="h-4 w-4 text-primary-foreground" />
+              <Avatar className="h-8 w-8 border-2 border-primary dark:border-brand-gold">
+                <AvatarFallback className="bg-primary dark:bg-brand-gold">
+                  <LogoIcon className="h-4 w-4 text-primary-foreground dark:text-black" />
                 </AvatarFallback>
               </Avatar>
               <div className="flex items-center gap-2 rounded-lg bg-muted p-3">
@@ -98,7 +107,7 @@ export default function ChatInterface() {
           )}
         </div>
       </ScrollArea>
-      <SheetFooter className="p-4">
+      <SheetFooter className="p-4 border-t">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full items-start gap-2">
             <FormField
@@ -108,14 +117,16 @@ export default function ChatInterface() {
                 <FormItem className="flex-1">
                   <FormControl>
                     <Textarea
-                      placeholder="e.g., I have oily hair and struggle with frizz..."
-                      className="resize-none"
+                      placeholder="Ask about your hair..."
+                      className="resize-none bg-muted focus:ring-1 focus:ring-primary dark:focus:ring-brand-gold"
                       rows={1}
                       {...field}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" && !e.shiftKey) {
                           e.preventDefault();
-                          form.handleSubmit(onSubmit)();
+                          if (!isPending && form.getValues('message').trim()) {
+                            form.handleSubmit(onSubmit)();
+                          }
                         }
                       }}
                       disabled={isPending}
@@ -124,7 +135,7 @@ export default function ChatInterface() {
                 </FormItem>
               )}
             />
-            <Button type="submit" size="icon" disabled={isPending}>
+            <Button type="submit" size="icon" disabled={isPending || !form.formState.isValid} className="bg-primary text-primary-foreground dark:bg-brand-gold dark:text-black">
               <Send className="h-4 w-4" />
               <span className="sr-only">Send message</span>
             </Button>
