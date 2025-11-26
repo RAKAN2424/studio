@@ -46,8 +46,9 @@ export default function Header() {
   );
   
   const navLinkClasses = cn(
-    "hover:text-primary dark:hover:text-brand-gold transition-colors text-xs font-bold uppercase tracking-widest",
-    (isScrolled || mobileMenuOpen) ? "text-gray-700 dark:text-gray-300" : "text-white"
+    "hover:text-primary dark:hover:text-brand-gold transition-colors text-lg",
+    (isScrolled || mobileMenuOpen) ? "text-gray-700 dark:text-gray-300" : "text-white",
+    "font-caveat"
   );
   
   const logoSrc = isMounted && theme === 'dark' 
@@ -103,7 +104,7 @@ export default function Header() {
      {/* Mobile Menu */}
      <div className={cn("fixed inset-0 z-30 bg-white/95 dark:bg-black/95 backdrop-blur-lg transition-transform duration-300 md:hidden", mobileMenuOpen ? "translate-y-0" : "-translate-y-full")}>
         <div className="container mx-auto flex flex-col justify-center items-center h-full pt-20">
-            <nav className="flex flex-col items-center gap-8 text-lg font-bold uppercase tracking-widest text-foreground">
+            <nav className="flex flex-col items-center gap-8 text-2xl text-foreground font-caveat">
                 <Link href="/" className="hover:text-primary dark:hover:text-brand-gold" onClick={() => setMobileMenuOpen(false)}>Home</Link>
                 <Link href="/shop" className="hover:text-primary dark:hover:text-brand-gold" onClick={() => setMobileMenuOpen(false)}>Shop</Link>
                 <a href="/#contact" className="hover:text-primary dark:hover:text-brand-gold" onClick={() => setMobileMenuOpen(false)}>Contact</a>
