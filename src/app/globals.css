@@ -42,7 +42,7 @@
     --popover: 0 0% 4%;
     --popover-foreground: 0 0% 80%;
     --primary: 45 61% 55%; /* #C9A24F - Dark Gold for dark mode */
-    --primary-foreground: 0 0% 98%;
+    --primary-foreground: 0 0% 0%;
     --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 10%;
