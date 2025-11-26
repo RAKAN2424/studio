@@ -1,6 +1,7 @@
 
 "use client";
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTheme } from "next-themes";
 import { ShoppingBag, Sun, Moon, User, Menu, X } from "lucide-react";
 import { useState, useEffect } from 'react';
@@ -56,7 +57,14 @@ export default function Header() {
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <div className='flex-1 md:flex-none'>
             <Link href="/" className={cn("text-3xl font-serif font-bold tracking-wider", (isScrolled || mobileMenuOpen) ? "text-foreground" : "text-white")}>
-                LAVIE
+                 <Image
+                    src="https://i.ibb.co/bnrr18f/Lavie-1080-x-1080-px-1080-x-360-px.png"
+                    alt="LAVIE Logo"
+                    width={140}
+                    height={56}
+                    className="h-14 w-auto drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]"
+                    priority
+                  />
             </Link>
         </div>
         <nav className="hidden md:flex gap-8">
@@ -102,5 +110,3 @@ export default function Header() {
     </>
   );
 }
-
-    
